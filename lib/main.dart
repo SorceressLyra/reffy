@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -22,6 +24,8 @@ void main() async {
 }
 
 class MainApp extends StatefulWidget {
+  const MainApp({super.key});
+
   @override
   State<StatefulWidget> createState() => _MainAppState();
 }
@@ -62,6 +66,7 @@ class _MainAppState extends State<MainApp> {
           floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
           appBar: AppBar(
             actions: [
+              if(!Platform.isMacOS)
               IconButton(
                 onPressed: () {
                   windowManager.close();

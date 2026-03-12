@@ -1,3 +1,13 @@
-# reffy
+# Reffy (working title)
 
-A new Flutter project.
+A crossplatform reference and speedsketching tool for artists.
+
+## Current status
+
+> IN ACTIVE DEVELOPMENT (PRE-RELEASE)
+
+
+## License
+GNU General Public License v3.0
+
+[License](COPYING.txt)

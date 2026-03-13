@@ -31,7 +31,6 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -53,8 +52,16 @@ class _MainAppState extends State<MainApp> {
           bottomNavigationBar: BottomAppBar(
             child: Row(
               children: [
-                IconButton(onPressed: () {}, icon: Icon(Icons.home), tooltip: "Home",),
-                IconButton(onPressed: () {}, icon: Icon(Icons.settings), tooltip: "Settings",),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.home),
+                  tooltip: "Home",
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.settings),
+                  tooltip: "Settings",
+                ),
               ],
             ),
           ),
@@ -63,25 +70,20 @@ class _MainAppState extends State<MainApp> {
             icon: Icon(Icons.add_photo_alternate),
             label: Text("Add references"),
           ),
-          floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
-          appBar: AppBar(
-            actions: [
-              if(!Platform.isMacOS)
-              IconButton(
-                onPressed: () {
-                  windowManager.close();
-                },
-                icon: Icon(Icons.close),
-              ),
-            ],
-          ),
-          body: Center(
-            child: Column(
-              children: [
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.endContained,
+          appBar: Platform.isWindows ? PreferredSize(
+            preferredSize: const Size.fromHeight(kWindowCaptionHeight),
+            child: WindowCaption(
+              title: Text("Reffy"),
+              brightness: Brightness.dark,
+              backgroundColor: Colors.transparent,
+            ),
+          ) : null,
+          body: Center(child: Column(children: [
              
               ],
-            ),
-          ),
+            )),
         ),
       ),
     );

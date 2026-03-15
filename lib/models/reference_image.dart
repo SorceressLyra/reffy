@@ -1,10 +1,8 @@
 import 'dart:io';
 
 class ReferenceImage {
-
-  String imagePath;
+  Directory imagePath;
   List<String> albums;
 
   ReferenceImage({required this.imagePath, required this.albums});
-  
 }

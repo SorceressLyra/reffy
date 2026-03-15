@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
+import 'package:reffy/models/reference_image.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:hive_ce/hive_ce.dart';
 import 'package:reffy/hive/hive_registrar.g.dart';
@@ -12,7 +14,17 @@ void main() async {
   await windowManager.ensureInitialized();
 
   await Hive.initFlutter();
+  Hive.registerAdapters();
 
+  var imageBox = await Hive.openBox('Images');
+  await Hive.openBox('Settings');
+
+  imageBox.add(
+    ReferenceImage(
+      imagePath: Directory("C:/Users/Lyra/Pictures/DSC00658.jpg"),
+      albums: [],
+    ),
+  );
 
   WindowOptions windowOptions = WindowOptions(
     size: Size(800, 600),
@@ -37,6 +49,16 @@ class MainApp extends StatefulWidget {
 }
 
 class _MainAppState extends State<MainApp> {
+  late final Box imageBox;
+  final List<ReferenceImage> images = [];
+
+  @override
+  void initState() {
+    imageBox = Hive.box("Images");
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -70,11 +92,13 @@ class _MainAppState extends State<MainApp> {
                 ),
                 VerticalDivider(),
                 DropdownMenu(
+                  initialSelection: "all",
                   dropdownMenuEntries: [
-                    DropdownMenuEntry(value: "all", label: "All", leadingIcon: Icon(Icons.auto_awesome_mosaic_outlined)),
-                    DropdownMenuEntry(value: "album1", label: "Tadeas Refs",),
-                    DropdownMenuEntry(value: "album2", label: "Butch Lesbians"),
-                    DropdownMenuEntry(value: "album3", label: "Horses"),
+                    DropdownMenuEntry(
+                      value: "all",
+                      label: "All",
+                      leadingIcon: Icon(Icons.auto_awesome_mosaic_outlined),
+                    ),
                   ],
                 ),
                 IconButton(
@@ -102,10 +126,40 @@ class _MainAppState extends State<MainApp> {
                   ),
                 )
               : null,
-          body: Center(child: Column(children: [
-             
-              ],
-            )),
+          body: StreamBuilder(
+            stream: imageBox.watch(),
+            builder: (context, asyncSnapshot) {
+              return Center(
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 150,
+                  ),
+                  itemCount: imageBox.length,
+                  itemBuilder: (context, index) {
+                    ReferenceImage image = imageBox.getAt(index);
+                    return Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          debugPrint("${image.imagePath.path} clicked");
+                        },
+                        child: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),  
+                            child: Image.file(
+                              File(image.imagePath.path),
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              );
+            },
+          ),
         ),
       ),
     );

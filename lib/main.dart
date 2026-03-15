@@ -1,12 +1,18 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:hive_ce/hive_ce.dart';
+import 'package:reffy/hive/hive_registrar.g.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Must add this line.
   await windowManager.ensureInitialized();
+
+  await Hive.initFlutter();
+
 
   WindowOptions windowOptions = WindowOptions(
     size: Size(800, 600),

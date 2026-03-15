@@ -16,15 +16,9 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapters();
 
-  var imageBox = await Hive.openBox('Images');
+  await Hive.openBox('Images');
   await Hive.openBox('Settings');
 
-  imageBox.add(
-    ReferenceImage(
-      imagePath: Directory("C:/Users/Lyra/Pictures/DSC00658.jpg"),
-      albums: [],
-    ),
-  );
 
   WindowOptions windowOptions = WindowOptions(
     size: Size(800, 600),
@@ -50,11 +44,13 @@ class MainApp extends StatefulWidget {
 
 class _MainAppState extends State<MainApp> {
   late final Box imageBox;
+  late final Box settingsBox;
   final List<ReferenceImage> images = [];
 
   @override
   void initState() {
     imageBox = Hive.box("Images");
+    settingsBox = Hive.box("Settings");
 
     super.initState();
   }

@@ -62,24 +62,40 @@ class _MainAppState extends State<MainApp> {
                   icon: Icon(Icons.settings),
                   tooltip: "Settings",
                 ),
+                VerticalDivider(),
+                DropdownMenu(
+                  dropdownMenuEntries: [
+                    DropdownMenuEntry(value: "all", label: "All", leadingIcon: Icon(Icons.auto_awesome_mosaic_outlined)),
+                    DropdownMenuEntry(value: "album1", label: "Tadeas Refs",),
+                    DropdownMenuEntry(value: "album2", label: "Butch Lesbians"),
+                    DropdownMenuEntry(value: "album3", label: "Horses"),
+                  ],
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.perm_media_outlined),
+                  tooltip: "Add Album",
+                ),
               ],
             ),
           ),
           floatingActionButton: FloatingActionButton.extended(
             onPressed: () {},
-            icon: Icon(Icons.add_photo_alternate),
+            icon: Icon(Icons.add_photo_alternate_outlined),
             label: Text("Add references"),
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.endContained,
-          appBar: Platform.isWindows ? PreferredSize(
-            preferredSize: const Size.fromHeight(kWindowCaptionHeight),
-            child: WindowCaption(
-              title: Text("Reffy"),
-              brightness: Brightness.dark,
-              backgroundColor: Colors.transparent,
-            ),
-          ) : null,
+          appBar: Platform.isWindows
+              ? PreferredSize(
+                  preferredSize: const Size.fromHeight(kWindowCaptionHeight),
+                  child: WindowCaption(
+                    title: Text("Reffy"),
+                    brightness: Brightness.dark,
+                    backgroundColor: Colors.transparent,
+                  ),
+                )
+              : null,
           body: Center(child: Column(children: [
              
               ],

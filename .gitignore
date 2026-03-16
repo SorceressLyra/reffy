@@ -32,7 +32,7 @@
 .ccls-cache
 
 # Other editors
-./zed/*
+.zed/*
 
 # This file, on the master branch, should never exist or be checked-in.
 #

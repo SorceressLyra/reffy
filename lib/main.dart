@@ -19,7 +19,6 @@ void main() async {
   await Hive.openBox('Images');
   await Hive.openBox('Settings');
 
-
   WindowOptions windowOptions = WindowOptions(
     size: Size(800, 600),
     center: true,
@@ -142,7 +141,7 @@ class _MainAppState extends State<MainApp> {
                         child: MouseRegion(
                           cursor: SystemMouseCursors.click,
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),  
+                            borderRadius: BorderRadius.circular(8.0),
                             child: Image.file(
                               File(image.imagePath.path),
                               fit: BoxFit.fill,

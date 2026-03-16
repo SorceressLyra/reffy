@@ -31,6 +31,9 @@
 .vscode/*
 .ccls-cache
 
+# Other editors
+./zed/*
+
 # This file, on the master branch, should never exist or be checked-in.
 #
 # On a *final* release branch, that is, what will ship to stable or beta, the

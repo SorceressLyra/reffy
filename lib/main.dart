@@ -1,11 +1,9 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 import 'package:reffy/models/reference_image.dart';
 import 'package:window_manager/window_manager.dart';
-import 'package:hive_ce/hive_ce.dart';
 import 'package:reffy/hive/hive_registrar.g.dart';
 
 void main() async {
